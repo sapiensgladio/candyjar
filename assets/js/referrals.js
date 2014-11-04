@@ -248,7 +248,7 @@ var utils = {
         document.cookie = cname + "=" + cvalue + "; " + expires;
     }
     , sendGAEvent : function(labelValue){
-        ga('send', 'event', 'button', 'click', labelValue, {'page': '/'}, 1);
+        ga('send', 'event', 'button', 'click', labelValue, {'page': window.location.pathname}, 1);
 
         /**
          * Utility to wrap the different behaviors between W3C-compliant browsers
