@@ -18,6 +18,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .mobile, .mobile-768 {display:none;}
 
 .background-white {background: white}
+.background-white-opacity {background: rgba(255,255,255,.9)}
 .padding-20 {padding:20px;}
 .padding-tb-20 {padding:20px 0;}
 .padding-30 {padding:30px;}
@@ -58,29 +59,33 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .margin-auto {margin-left: auto; margin-right: auto;}
 /*-----------------------------Chrome-----------------------------*/
 .inner {max-width:1366px; width:100%; margin: 0 auto; padding-left: 20px; padding-right: 20px;}
-.logo {max-height:96px }
-.logo h1 {margin-top:8px;}
-
+header {}
+header nav {text-align: left; }
+.logo { -webkit-transition: height 1s,width 1s,left 1s;-moz-transition: height 1s,width 1s,left 1s;-o-transition: height 1s,width 1s,left 1s;transition: height 1s,width 1s,left 1s; z-index: 1000;max-height:96px;}
+.logo.scrolled {position: fixed;left: 20px; top: 10px; margin: auto; height:100px; width: 100px;}
+.logo h1 {margin-top:8px}
 footer {font-size:80%;}
-
-#content { background: white url('../assets/candy.jpg') no-repeat center; background-size: cover}
+#page {padding-top: 40px}
+#content {background: white  url('../assets/candy.jpg') no-repeat center 0 fixed; }
 .singup-page {width:40%; overflow: hidden }
-.signup-wrapper, .share-wrapper  {margin:165px auto;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
-.share-wrapper  {margin:65px auto; overflow: hidden; min-height: 355px;}
+.signup-wrapper, .share-wrapper  {margin:100px auto;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
+.share-wrapper  {margin:0 auto; padding:65px 0; overflow: hidden; min-height: 355px;}
 .signup-wrapper h1, .share-wrapper h1 {color: #3FA9F5; margin-top:0; margin-bottom: 15px}
 .signup-wrapper p, .share-wrapper p {margin-bottom: 35px}
 .signup-wrapper input, .signup-wrapper button {-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px; }
 .signup-wrapper input[type='email'], .signup-wrapper input[type='text'] {padding: 8px 5px;}
 .signup-wrapper input[type='submit'], .signup-wrapper button {background: #3FA9F5; border: 1px solid #3FA9F5; color: #fff;display: inline-block; vertical-align: middle; padding:8px 15px; width:28% }
 
-#toast, #toast_persist {padding: 15px; width: 80%; max-width: 500px; left: 50%; margin-left: -250px; -webkit-border-radius: 0 0 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px; position: fixed; top: 0; display: none; background:#de6a99; font-size:80%; text-align: center; color: white;}
+#toast, #toast_persist {padding: 5px; width: 80%; max-width: 500px; left: 50%; margin-left: -250px; -webkit-border-radius: 0 0 3px;-moz-border-radius: 0 0 3px 3px;border-radius: 0 0 3px 3px; top: 0; display: none; background:#de6a99; font-size:80%; text-align: center; color: white; z-index: 10000;  position: fixed; margin-bottom: 10px}
+#toast.scrolled, #toast_persist.scrolled { }
 #toast a, #toast_persist a{text-decoration: underline}
 #toast_persist * {color:white; }
-#toast_persist h6 {font-size: 120%}
+#toast_persist h6 {font-size: 120%; margin-bottom: 5px}
 #toast_persist #close_toast {position: absolute; right: 15px; top: 5px; font-weight: 700; font-family: 'Bitter', serif;cursor: pointer; font-size: 130%; color: #333}
 
-.kickstarter-wrapper  {margin:105px auto;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
-.kickstarter-wrapper h3 {color: #a09f9f; margin-bottom: 20px;}
+.kickstarter-wrapper {padding: 0 0 20px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;overflow: auto;}
+.kickstarter-wrapper h1 {color: white; text-shadow: 0 0 2px rgba(0, 0, 0, 0.75);}
+.kickstarter-wrapper h3 {color: #a09f9f; margin-bottom: 20px; padding-top: 50px;}
 .kickstart-callout {margin-top:30px; text-align: right;}
 .kickstart-callout p {font-size: 90%; padding-right: 10px;margin-bottom: 14px}
 .kickstart-callout p, .kickstart-callout a {display: inline-block; vertical-align: middle;}
@@ -115,9 +120,13 @@ footer {font-size:80%;}
 #progress-indicator {height: 50px; position: absolute; bottom: 50px; width:100%; z-index: 5; background: #acacac}
 #progress-indicator #blue {background: #3FA9F5;display: inline-block;height: 100%;width: auto; }
 
-#kickstarter, #referral { min-height: 1000px;height: 1000px;margin: 0 auto;width: 100%;max-width: 1920px;position: relative; }
-#kickstarter {background:  url('../assets/candy.jpg') no-repeat center fixed; }
+#kickstarter-share .circle {display: inline-block; height: 195px; width: 195px;vertical-align: middle; margin:20px 30px;cursor: pointer}
+#kickstarter-share .circle:hover {background: rgba(255,255,255,.98)}
+#kickstarter-share .circle:hover a, #kickstarter-share .circle a:hover {text-decoration: none}
+.circle-inner {padding: 40px 10px;}
+
 /*------------------mobile menu breakpoint ----------------------*/
+
 @media only screen and (max-width : 1406px) {
     .inner {padding: 0 20px}
 }

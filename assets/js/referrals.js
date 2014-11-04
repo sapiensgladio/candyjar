@@ -14,48 +14,45 @@ var cjReferral = {
         if ((window.location.href).indexOf("preview_key") > -1 || jQuery(".kickstarter-wrapper").length > 0)
         {
             kickstarter.init();
-            utils.parallax();
+
         }
-        else
-        {
-            //homepage
-            jQuery("#email").focus();
-            if(this.DEV_ENV) console.log("cjReferral init");
-            //capture any parameters in URL
-            this.getEmailFromURL();
-            this.checkIfFirstTimeVisitor();
-            this.vanityURL();
-            //bind click event to sign up button
+       //homepage
+        //jQuery("#email").focus();
+        if(this.DEV_ENV) console.log("cjReferral init");
+        //capture any parameters in URL
+        this.getEmailFromURL();
+        this.checkIfFirstTimeVisitor();
+        this.vanityURL();
+        //bind click event to sign up button
 
-            jQuery("#signup_form").submit(function (evt){
-                //checks to see if email input form is valid for email address
-                if(!cjReferral.validateForm()) {
-                    return false;
+        jQuery("#signup_form").submit(function (evt){
+            //checks to see if email input form is valid for email address
+            if(!cjReferral.validateForm()) {
+                return false;
+            }
+            cjReferral.setReferralLinkFromURL()
+            cjReferral.emailFromURL = utils.decipher(decodeURIComponent(cjReferral.referringLink));
+            cjReferral.email = cjReferral.getEmail();
+
+            if(!cjReferral.validateNewEmail()) {
+                return false;
+            }
+            else{
+
+                if(cjReferral.setReferralLinkFromURL()){
+                    utils.sendGAEvent(cjReferral.emailFromURL);
                 }
-                cjReferral.setReferralLinkFromURL()
-                cjReferral.emailFromURL = utils.decipher(decodeURIComponent(cjReferral.referringLink));
-                cjReferral.email = cjReferral.getEmail();
+                //set email to user entered value
+                cjReferral.emailCipherObj = cjReferral.setEmailCipher();
+                cjReferral.emailCipher = encodeURIComponent(cjReferral.emailCipherObj);
+                if(cjReferral.DEV_ENV) console.log(cjReferral.emailCipher);
+                cjReferral.referralLink = cjReferral.setRefLink();
 
-                if(!cjReferral.validateNewEmail()) {
-                    return false;
-                }
-                else{
-
-                    if(cjReferral.setReferralLinkFromURL()){
-                        utils.sendGAEvent(cjReferral.emailFromURL);
-                    }
-                    //set email to user entered value
-                    cjReferral.emailCipherObj = cjReferral.setEmailCipher();
-                    cjReferral.emailCipher = encodeURIComponent(cjReferral.emailCipherObj);
-                    if(cjReferral.DEV_ENV) console.log(cjReferral.emailCipher);
-                    cjReferral.referralLink = cjReferral.setRefLink();
-
-                    utils.sendGAEvent(cjReferral.email);
-                    cjReferral.setHiddenInputs(); //sets hidden field values for emailCipher & refLink for db submission
-                    cjReferral.setReferralCookies(); //sets email, emailCipher & refLink into HTML5 local storage and cookie for state management
-                }
-            });
-        }
+                utils.sendGAEvent(cjReferral.email);
+                cjReferral.setHiddenInputs(); //sets hidden field values for emailCipher & refLink for db submission
+                cjReferral.setReferralCookies(); //sets email, emailCipher & refLink into HTML5 local storage and cookie for state management
+            }
+        });
 
     }
     , checkIfFirstTimeVisitor : function(){
@@ -293,15 +290,18 @@ var utils = {
     }
     , parallax : function(){
         var $window = jQuery(window);
-        jQuery('section[data-type="background"]').each(function(){
-            var $bgobj = jQuery(this); // assigning the object
-            jQuery(window).scroll(function() {
-                //var yPos = -($window.scrollTop() / $bgobj.data('speed'));
-                var yPos = -(($window.scrollTop() - $bgobj.offset().top) / $bgobj.data('speed'));
-                var coords = '50% '+ yPos + 'px';
-                $bgobj.css({ backgroundPosition: coords });
-            });
+        jQuery(window).scroll(function() {
+            console.log($window.scrollTop());
+            if($window.scrollTop() >= 100 && jQuery(".logo.scrolled").length < 1){
+                jQuery(".logo, #toast, #toast_persist").addClass("scrolled");
+            }
+            else if($window.scrollTop() < 100)  {
+                jQuery(".logo, #toast, #toast_persist").removeClass("scrolled");
+                jQuery("").removeClass("scrolled");
+
+            }
         });
+
     }
 }
 var kickstarter = {
@@ -328,6 +328,24 @@ var kickstarter = {
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+        console.log(jQuery(".pluginButtonLabel").length);
+        if(jQuery(".pluginButtonLabel").length > 0)
+        {
+            kickstarter.deferFBClickEvent();
+        }
+        else
+        {
+            window.setTimeout(kickstarter.deferFBClickEvent, 5000);
+        }
+    }
+    , deferFBClickEvent : function(){
+
+        console.log(jQuery(".pluginButtonLabel").length);
+        jQuery(".circle-inner.facebook").click(function(){
+            console.log("click");
+            jQuery(".pluginButtonLabel").click();
+        });
     }
     , initTwitter : function(){
         var twitterString = '<a href="https://twitter.com/share" class="twitter-share-button" data-url="'+this.kickstartLink+'" data-count="none" data-text="Candy Jar, a Kickstarter project to create the best place to discover and buy candy online" data-size="large">Tweet</a>';

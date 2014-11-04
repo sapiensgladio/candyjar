@@ -34,7 +34,7 @@
 
     {% include 'twitter-cards' %}
     {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
-    {{ 'main.css' | asset_url | stylesheet_tag }}
+    {{ 'main.kickstarter.css' | asset_url | stylesheet_tag }}
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|Bitter:400,700' rel='stylesheet' type='text/css'>
     {{ 'html5shiv.js' | asset_url | script_tag }}
@@ -56,36 +56,28 @@
 
 </head>
 <body>
-<section>
     <header>
-        <nav>
-            <div class="inner">
-                <div class="row">
-                    <div class="col-xs-5 col-md-4">
-                        <div class="logo">
-                            {% if settings.use_logo %}
-                            <h1><a href="/"><img src="{{ 'logo-signup.png' | asset_url }}" alt="{{ shop.name }}" /></a></h1>
-                            {% if template == 'index' %}
-                            <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
-                            {% endif %}
-                            {% else %}
-                            <h1><a href="/">{{ shop.name }}</a></h1>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-xs-7 pull-right kickstart-callout" style="display:none">
-                        <p>Check Us Out on Kickstarter</p>
-                        <img src="{{ 'kickstarter-logo-k-color-48.png' | asset_url}}" alt="kickstarter" />
-                    </div>
+        <div class="inner">
+            <nav>
+                <div class="logo">
+                    {% if settings.use_logo %}
+                    <h1><a href="/"><img src="{{ 'logo-signup.png' | asset_url }}" alt="{{ shop.name }}" /></a></h1>
+                    {% if template == 'index' %}
+                    <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+                    {% endif %}
+                    {% else %}
+                    <h1><a href="/">{{ shop.name }}</a></h1>
+                    {% endif %}
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
-</section>
 <!-- End below navigation -->
 
 <!-- Begin content-->
 <section id="content" class="clearfix" role="main">
+
+    <div class="inner">
     <div id="toast_persist"><div id="close_toast">X</div><div id="toast_inner"></div></div>
     {% if template == "list-collections" %}
     <div id="collection" class="row">
@@ -103,6 +95,7 @@
     {% else %}
     {{ content_for_layout }}
     {% endif %}
+    </div>
 </section>
 <!-- End content-->
 
@@ -187,7 +180,7 @@
 {% if settings.enable_product_image_zoom %}
 {{ 'jquery.zoom.js' | asset_url | script_tag }}
 {% endif %}
-{{ 'referrals.js' | asset_url | script_tag }}
+{{ 'referrals.kickstarter.js' | asset_url | script_tag }}
 {% if page.handle == 'share' %}
 <div id="fb-root"></div>
 {{ 'jquery-ui.min.js' | asset_url | script_tag }}
