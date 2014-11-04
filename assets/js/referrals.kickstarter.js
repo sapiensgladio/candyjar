@@ -69,7 +69,7 @@ var cjReferral = {
             localEmailCipher = utils.getCookie("emailCipher");
             localRefLink = utils.getCookie("refLink");
         }
-		//removing for Kickstarter
+		//removing for Kickstarter 
 		/**
         if((localEmail != null || localEmailCipher != null || localRefLink != null)
             && (localEmail.length > 0 || localEmailCipher.length > 0 || localRefLink.length > 0)
