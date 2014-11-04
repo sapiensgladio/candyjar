@@ -19,7 +19,6 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 .background-white {background: white}
 .background-white-opacity {background: rgba(255,255,255,.9)}
-.padding-10 {padding:10px;}
 .padding-20 {padding:20px;}
 .padding-tb-20 {padding:20px 0;}
 .padding-30 {padding:30px;}

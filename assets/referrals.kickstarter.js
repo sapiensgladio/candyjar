@@ -14,7 +14,7 @@ var cjReferral = {
         if ((window.location.href).indexOf("preview_key") > -1 || jQuery(".kickstarter-wrapper").length > 0)
         {
             kickstarter.init();
-			//add ga() tracking
+
         }
        //homepage
         //jQuery("#email").focus();
@@ -70,8 +70,6 @@ var cjReferral = {
             localRefLink = utils.getCookie("refLink");
         }
 
-		//[ROB: 11/04/2014] Removing toast for Kickstarter
-		/**
         if((localEmail != null || localEmailCipher != null || localRefLink != null)
             && (localEmail.length > 0 || localEmailCipher.length > 0 || localRefLink.length > 0)
             && (window.location.href).indexOf("share") < 0){
@@ -79,7 +77,6 @@ var cjReferral = {
             this.setToastPersist("<h6>You look familiar.</h6><p>Looks like you've already signed up! <a href='/share'>Want to track your progress?</a></p>");
             return false;
         }
-		**/
     }
     , validateNewEmail : function(){
         console.log(this.email);
@@ -251,7 +248,7 @@ var utils = {
         document.cookie = cname + "=" + cvalue + "; " + expires;
     }
     , sendGAEvent : function(labelValue){
-        ga('send', 'event', 'button', 'click', labelValue, {'page': window.location.pathname}, 1);
+        ga('send', 'event', 'button', 'click', labelValue, {'page': '/'}, 1);
 
         /**
          * Utility to wrap the different behaviors between W3C-compliant browsers
