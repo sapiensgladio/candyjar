@@ -69,14 +69,15 @@ var cjReferral = {
             localEmailCipher = utils.getCookie("emailCipher");
             localRefLink = utils.getCookie("refLink");
         }
-
+		//removing for Kickstarter
+		/**
         if((localEmail != null || localEmailCipher != null || localRefLink != null)
             && (localEmail.length > 0 || localEmailCipher.length > 0 || localRefLink.length > 0)
             && (window.location.href).indexOf("share") < 0){
             //show toast - you've been here before - want to check you progress
             this.setToastPersist("<h6>You look familiar.</h6><p>Looks like you've already signed up! <a href='/share'>Want to track your progress?</a></p>");
             return false;
-        }
+        } **/
     }
     , validateNewEmail : function(){
         console.log(this.email);
